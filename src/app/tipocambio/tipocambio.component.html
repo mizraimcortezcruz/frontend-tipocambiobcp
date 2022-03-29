@@ -1,0 +1,30 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Tipo de Cambio</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listado de Tipos de Cambios</h5>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button">
+          Crear Tipo de Cambio
+        </button>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Moneda Origen</th>
+                    <th>Monto Destino</th>
+                    <th>Moneda Destino</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of tipocambio">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.monedaOrigen }}</td>
+                    <td>{{ data.montoDestino }}</td>
+                    <td>{{ data.monedaDestino }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
