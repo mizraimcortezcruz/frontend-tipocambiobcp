@@ -11,12 +11,14 @@ import { TipocambioService } from "./tipocambio/tipocambio.service";
 import { RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { FormComponent } from './tipocambio/form.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
+  {path: '', redirectTo: '/tipocambio', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
-  {path: 'tipocambio', component: TipocambioComponent}
+  {path: 'tipocambio', component: TipocambioComponent},
+  {path: 'tipocambio/form', component: FormComponent},
+  {path: 'tipocambio/form/:id', component: FormComponent}
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    TipocambioComponent
+    TipocambioComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

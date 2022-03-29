@@ -15,25 +15,26 @@ export class TipocambioService {
   private urlEndPoint: string = 'http://localhost:6004/tipocambio/getAll';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   private urlEndPointGetAllTipoCambio: string = 'http://localhost:6004/tipocambio/getAll';
+  private urlEndPointGetByIdTipoCambio: string = 'http://localhost:6004/tipocambio/getById';
   private urlEndPointGetToken: string = 'http://localhost:6004/login';
 
   constructor(private http: HttpClient) { }
 
   getToken(usuario:any,clave:any): Observable<Token> {
-    console.info("getAllToken");
-    console.info("getAllToken usuario"+usuario);
-    console.info("getAllToken clave"+clave);
+    console.info("TipocambioService getAllToken");
+    console.info("TipocambioService getAllToken usuario"+usuario);
+    console.info("TipocambioService getAllToken clave"+clave);
     return this.http.post<Token>(this.urlEndPointGetToken, { username: usuario,password: clave }, {headers: this.httpHeaders});
     
   }
 
   getAllTipoCambio(token:any): Observable<Tipocambio[]> {
-    console.info("getAllTipoCambio");
-    console.info("getAllTipoCambio token es:"+token);
+    console.info("TipocambioService getAllTipoCambio");
+    console.info("TipocambioService getAllTipoCambio token es:"+token);
     return this.http.get(this.urlEndPointGetAllTipoCambio).pipe(
       map((response:any) =>{
         //response as Tipocambio[]
-        console.info("getAllTipoCambio response");
+        console.info("TipocambioService getAllTipoCambio response");
         return response as Tipocambio[];
       } )
     );
@@ -44,7 +45,8 @@ export class TipocambioService {
   }
 
   getTipoCambioById(id:any): Observable<Tipocambio>{
-    return this.http.get<Tipocambio>('${this.urlEndPoint}/${id}')
+    console.info("TipocambioService getTipoCambioById:"+id);
+    return this.http.get<Tipocambio>(`${this.urlEndPointGetByIdTipoCambio}/${id}`)
   }
 
   updateTipoCambio(tipocambio: Tipocambio): Observable<Tipocambio>{

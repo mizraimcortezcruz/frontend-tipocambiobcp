@@ -11,6 +11,7 @@
             <thead>
                 <tr>
                     <th>Código</th>
+                    <th>Monto Origen</th>
                     <th>Moneda Origen</th>
                     <th>Monto Destino</th>
                     <th>Moneda Destino</th>
@@ -19,9 +20,13 @@
             <tbody>
                 <tr *ngFor="let data of tipocambio">
                     <td>{{ data.id }}</td>
+                    <td>{{ data.montoOrigen }}</td>
                     <td>{{ data.monedaOrigen }}</td>
                     <td>{{ data.montoDestino }}</td>
                     <td>{{ data.monedaDestino }}</td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/tipocambio/form', data.id]" class="btn btn-primary btn-sm">editar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

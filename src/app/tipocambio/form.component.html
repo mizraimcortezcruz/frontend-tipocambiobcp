@@ -1,0 +1,47 @@
+<div class="card bg-dark text-white">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+
+        <form>
+
+            <div class="form-group row">
+                <label for="id" class="col-form-label col-sm-2">Código</label>
+                <div class="col-sm-6">
+                    <input type="text" disabled class="form-control" [(ngModel)]="tipocambio.id" name="id">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="montoOrigen" class="col-form-label col-sm-2">Monto Origen</label>
+                <div class="col-sm-6">
+                    <input type="text" disabled class="form-control" [(ngModel)]="tipocambio.montoOrigen" name="montoOrigen">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="monedaOrigen" class="col-form-label col-sm-2">Moneda Origen</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="tipocambio.monedaOrigen" name="monedaOrigen">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="montoDestino" class="col-form-label col-sm-2">Monto Destino</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="tipocambio.montoDestino" name="montoDestino">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="monedaDestino" class="col-form-label col-sm-2">Moneda Destino</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="tipocambio.monedaDestino" name="monedaDestino">
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>
