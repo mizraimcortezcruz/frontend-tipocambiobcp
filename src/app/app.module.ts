@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './tipocambio/form.component';
 import { LoginComponent } from './tipocambio/login.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 const routes: Routes = [
   {path: '', redirectTo: '/tipocambio/login', pathMatch: 'full'},
@@ -38,7 +39,8 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDialogModule
   ],
   providers: [TipocambioService],
   bootstrap: [AppComponent]

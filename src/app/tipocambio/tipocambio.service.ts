@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Component,Injectable } from '@angular/core';
+/*import {MatDialog} from '@angular/material/dialog';*/
+/*import {MaterialModule} from '@angular/material';*/
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Tipocambio } from './tipocambio';
 import { Token } from "./token";
@@ -18,8 +21,10 @@ export class TipocambioService {
   private urlEndPointGetAllTipoCambio: string = `http://localhost:6004/tipocambio/getAll`;
   private urlEndPointGetByIdTipoCambio: string = 'http://localhost:6004/tipocambio/getById';
   private urlEndPointGetToken: string = 'http://localhost:6004/login';
-
-  constructor(private http: HttpClient) { }
+  private urlEndPointSaveTipoCambio: string = `http://localhost:6004/tipocambio/guardar`;
+  private urlEndPointUpdateTipoCambio: string = `http://localhost:6004/tipocambio/actualizar`;
+  
+  constructor(private http: HttpClient,private matDialog: MatDialog,public dialog: MatDialog) { }
 
   getToken(usuario:any,clave:any): Observable<Token> {
     console.info("TipocambioService getAllToken");
@@ -30,8 +35,22 @@ export class TipocambioService {
   }
 
   erroHandler(error: HttpErrorResponse) {
+    /*let dialogRef = dialog.open(YourDialog, {
+      data: { name: 'austin' },
+    });*/
     alert("No se encuentra registrado en el sistema.");
+    /*this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        animal: 'panda',
+      },
+    });*/
     return throwError(error.message || 'server Error');
+  }
+
+  openDialog() {
+    //const dialogConfig = new MatDialogConfig();
+    //this.matDialog.open(DialogBodyComponent, dialogConfig);
+    
   }
 
   getAllTipoCambio(token:any): Observable<Tipocambio[]> {
@@ -51,7 +70,29 @@ export class TipocambioService {
   }
 
   createTipoCambio(tipocambio: Tipocambio) : Observable<Tipocambio> {
-    return this.http.post<Tipocambio>(this.urlEndPoint, tipocambio, {headers: this.httpHeaders})
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem('tokenbcp')}`
+    });
+    return this.http.post<Tipocambio>(this.urlEndPointSaveTipoCambio, tipocambio, {headers: reqHeader}).pipe(catchError(this.erroHandlerSave));
+  }
+
+  erroHandlerSave(error: HttpErrorResponse) {
+    alert("Solo los usuarios con rol ADMIN puede registrar nuevos tipos de cambio.");
+    return throwError(error.message || 'server Error');
+  }
+
+  actualizarTipoCambio(tipocambio: Tipocambio) : Observable<Tipocambio> {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem('tokenbcp')}`
+    });
+    return this.http.post<Tipocambio>(this.urlEndPointUpdateTipoCambio, tipocambio, {headers: reqHeader}).pipe(catchError(this.erroHandlerActualizar));
+  }
+
+  erroHandlerActualizar(error: HttpErrorResponse) {
+    alert("Solo los usuarios con rol ADMIN pueden actualizar el tipo de cambio.");
+    return throwError(error.message || 'server Error');
   }
 
   getTipoCambioById(id:any): Observable<Tipocambio>{
@@ -73,4 +114,14 @@ export class TipocambioService {
     return this.http.delete<Tipocambio>('${this.urlEndPoint}/${id}', {headers: this.httpHeaders})
   }
 
+}
+
+export class DialogContentExampleDialog {}
+
+@Component({
+  selector: 'dialog-data-example-dialog',
+  templateUrl: 'dialog-data-example-dialog.html'
+})
+export class DialogDataExampleDialog {
+  //constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

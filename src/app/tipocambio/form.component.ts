@@ -28,4 +28,28 @@ export class FormComponent implements OnInit {
     })
   }
 
+  actualizar(): void{
+    console.info("FormComponent actualizar");
+    console.info("FormComponent actualizar id"+this.tipocambio.id);
+    console.info("FormComponent actualizar data"+JSON.stringify(this.tipocambio));
+    /*this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if(id){
+        this.tipocambioService.getTipoCambioById(id).subscribe( (tipocambio) => this.tipocambio = tipocambio)
+      }
+    })*/
+
+    //llamar a la peticion que devuelve el ajax
+    this.tipocambioService.actualizarTipoCambio(this.tipocambio).subscribe(
+      tipocambio => {
+        this.tipocambio = tipocambio;
+        console.info("TipocambioComponent actualizar respuesta");
+        console.info("TipocambioComponent actualizar respuesta"+JSON.stringify(this.tipocambio));
+        console.info(JSON.stringify(this.tipocambio));
+        this.router.navigate(['/tipocambio'])
+      }
+    );
+  }
+
+  
 }
