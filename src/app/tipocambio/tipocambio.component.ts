@@ -15,8 +15,8 @@ export class TipocambioComponent implements OnInit {
   constructor(private tipocambioService: TipocambioService) { }
   ngOnInit() {
     console.info("constructor.....");
-
-    this.tipocambioService.getAllTipoCambio('').subscribe(
+    
+    this.tipocambioService.getAllTipoCambio(sessionStorage.getItem('tokenbcp')).subscribe(
       tipocambio => this.tipocambio = tipocambio
     );
 

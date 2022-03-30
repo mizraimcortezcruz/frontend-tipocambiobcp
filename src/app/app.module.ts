@@ -12,13 +12,15 @@ import { RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './tipocambio/form.component';
+import { LoginComponent } from './tipocambio/login.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/tipocambio', pathMatch: 'full'},
+  {path: '', redirectTo: '/tipocambio/login', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'tipocambio', component: TipocambioComponent},
   {path: 'tipocambio/form', component: FormComponent},
-  {path: 'tipocambio/form/:id', component: FormComponent}
+  {path: 'tipocambio/form/:id', component: FormComponent},
+  {path: 'tipocambio/login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -28,7 +30,8 @@ const routes: Routes = [
     FooterComponent,
     DirectivaComponent,
     TipocambioComponent,
-    FormComponent
+    FormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
